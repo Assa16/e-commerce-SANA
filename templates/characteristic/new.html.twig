@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle caracteristique{% endblock %}
+
+{% block body %}
+    <h1>Cree une nouvelle caracteristique</h1>
+
+    {{ include('characteristic/_form.html.twig') }}
+
+    <a href="{{ path('characteristic_index') }}"><button type="button" class="btn btn-primary btn-sm">retour à la liste de caracteristique</button></a>
+{% endblock %}

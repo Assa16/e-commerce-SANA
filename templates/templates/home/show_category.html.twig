@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+ 
+    <div class="jumbotron" style="background: linear-gradient(#041a31, #ffffff);">
+    <h1 style="color: white;">{{ category.name }}</h1>
+   <img src="{{ asset('img/header/22.jpg') }}" style="height: 600px; width: 100%; background-repeat: no-repeat; padding:15px;"/>
+   
+</div>
+<div class="row" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
+{% for article in category.articles %}
+        <a href="{{ path('shop_article', {'id': article.id}) }}" class="polaroid" style="margin: 2em;">
+            <img src="{{ asset('uploads/' ~ article.picture ) }}" style="width:100%;">  
+        <div class="container">
+        <p>
+        {{ article.name }}
+        {{ article.price }}$
+        </p>
+  </div>
+ </a>
+{% endfor %}
+</div>
+    <a href="{{ path('shop') }}"><button type="button" class="btn btn-primary btn-sm">Retour à la boutique</button></a>
+{% endblock %}

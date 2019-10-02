@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="col-1-2 product-img">
+        <div class="bg">
+            <img src="{{ asset('uploads/' ~ article.picture) }}" />
+        </div>
+    </div>
+    <div class="col-1-2 product-info">
+        <h1>{{ article.name }}</h1>
+        <h2>{{ article.price }} €</h2>
+        <h3>Description</h3>
+            <ul>
+            <li>{{ article.description }}</li>
+            <p> quantité disponible: {{ article.stock }}
+        {% for cat in article.characteristic %}
+            <li>{{ cat.getCharacteristicName}}: {{ cat.getType}}</li>
+        {% endfor %}
+            </ul>
+            <hr>
+<a href="" alt="add-cart" class="btn btn-outline-secondary btn-sm">Acheter</a>
+    </div>
+</div>
+<a href="{{ path('shop') }}"><button type="button" class="btn btn-primary btn-sm">Retour au shop</button></a>
+{% endblock %}
+
+

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caracteristique{% endblock %}
+
+{% block body %}
+    <h1>Caracteristique</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ characteristic.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom de la caracteristique</th>
+                <td>{{ characteristic.characteristicName }}</td>
+            </tr>
+            <tr>
+                <th>Type de la caracteristique</th>
+                <td>{{ characteristic.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('characteristic_index') }}"><button type="button" class="btn btn-primary btn-sm">Retour à la liste de caracteristique</button></a>
+
+    <a href="{{ path('characteristic_edit', {'id': characteristic.id}) }}"><button type="button" class="btn btn-primary btn-sm">Modifier la caracteristique</button></a>
+
+    {{ include('characteristic/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index Produit{% endblock %}
+
+{% block body %}
+    <h1>Mes produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Stock disponible</th>
+                <th>image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+            
+                <td>{{ article.id }}</td>
+                <td>{{ article.name }}</td>
+                <td>{{ article.price }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.stock }}</td>
+                <td><img src="{{ asset('uploads/' ~ article.picture) }}" style="height: 100px; width: 150px; border: 3px solid black;" /></td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}"><button type="button" class="btn btn-primary btn-sm">Visualiser le produit</button></a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}"><button type="button" class="btn btn-primary btn-sm">Modifier le produit</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">aucun produits trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}"><button type="button" class="btn btn-primary btn-sm">Crée un nouveau produit</button></a>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="col-1-2 product-img">
+        <div class="bg">
+            <img src="{{ asset('uploads/' ~ article.picture) }}" />
+        </div>
+    </div>
+    <div class="col-1-2 product-info">
+        <h1>{{ article.name }}</h1>
+        <h2>{{ article.price }} €</h2>
+        <h6>Description</h6>
+            <ul>
+            <li>{{ article.description }}</li>
+            </ul>
+            <hr>
+            <h6>Caracteristique</h6>
+        {% for cat in article.characteristic %}
+            <ul>
+            <li>{{ cat.getCharacteristicName}}: {{ cat.getType}}</li>
+            </ul>
+        {% endfor %}
+            <hr>
+            <p> quantité disponible: {{ article.stock }}
+            <hr>
+
+   <form action="{{ path('shopping_cart', {id : article.id }) }}" method="get">
+       <select name="qte" class="span1">
+           {% for i in 1..10 %}
+           <option value="{{ i }}">{{ i }}</option>
+           {% endfor %}
+       </select>
+
+       <div>
+            <a href="{{ path('shopping_cart', {'id' : article.id }) }}"><button class="btn btn-outline-warning btn-sm">Ajouter au panier</button></a>
+       </div>
+   </form>
+
+    {# <a class="btn btn-success" href="{{ path('add', {'id' : article.id }) }}">Ajouter au panier</a> #}
+    </div>
+</div>
+<a href="{{ path('shop') }}"><button type="button" class="btn btn-warning btn-sm">Retour au shop</button></a>
+{% endblock %}
+
+

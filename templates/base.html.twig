@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <body>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bienvenue Sur SANÃ!{% endblock %}</title>
+        {% block stylesheets %}
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/imgArticles.css') }}" />
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- BOOTSWATCH -->
+        <link href=" https://bootswatch.com/4/lux/bootstrap.min.css" rel="stylesheet">
+        <!-- FONT GOOGLEAPIS -->
+        <link href="https://fonts.googleapis.com/css?family=La+Belle+Aurore&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Domine&display=swap" rel="stylesheet">
+        {% endblock %}
+    </head>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ path('home') }}">SANÃ</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown show">
+      <a class="nav-link" href="{{ path('shop') }}" role="button" aria-haspopup="true" aria-expanded="true" >E-Boutique</a>
+      </li>
+
+      {% if is_granted('ROLE_ADMIN') %}
+         <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Espace Produit</a>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 39px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item" href="{{ path('article_index') }}">Creation de produits</a>
+                    <a class="dropdown-item" href="{{ path('category_index') }}">Categorie de produits</a>
+                    <a class="dropdown-item" href="{{ path('characteristic_index') }}">Caracteristisque de produits</a>
+                </div>
+            </li>
+      {% endif %}
+      </ul>
+      <ul>
+      {% if app.user == null %}
+         <li style="list-style-type: none; margin-right: 20px; margin-top: 12px;" >
+         <a href="{{ path('app_register') }}"><img src="{{ asset('img/icons/user.png') }}" alt="espace membre"/></a>
+         </li>
+      {% endif %}
+              {% if app.user %}
+                <li class="nav-item dropdown" style="list-style-type: none; margin-top: 12px;">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ app.user.username }}
+                </a>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 39px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item" href="{{ path('shopping_cartAction') }}">Mon panier</a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnection</a>
+                </div>
+            </li>
+        {% endif %}
+        </ul>
+        <a href="{{ path('shopping_cartAction') }}"><img src="{{ asset('img/icons/bag.png') }}" alt="panier" style="margin-right: 30px;"/></a>
+    </form>
+  </div>
+</nav>
+<!-- /NAVBAR -->
+{% block body %}{% endblock %}
+{% block footer %}
+<!-- FOOTER --> 
+<!-- Footer -->
+
+  
+<div style="background: linear-gradient(#ffffff, #428f9b);">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0">Suivez nous sur les reseaux sociaux</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <img src="{{ asset('img/icons/fb.png') }}" style="margin: 10px;" alt="facebook"/>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <img src="{{ asset('img/icons/twitter.png') }}" style="margin: 10px;" alt="twitter"/>
+          </a>
+          <!--Pinterest -->
+          <a class="li-ic">
+            <img src="{{ asset('img/icons/pint.png') }}" style="margin: 10px;" alt="pinterest"/>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <img src="{{ asset('img/icons/inst.png') }}" style="margin: 10px;" alt="instagram"/>
+          </a>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="color: #ffffff;">© 2019 Copyright:
+    <p>SANÃ ESHOP</p>
+  </div>
+  <!-- Copyright -->
+    </div>
+  </div>
+</footer>
+<!-- Footer -->
+<!-- /FOOTER --> 
+{% endblock %}
+
+ {% block javascripts %}
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ {% endblock %}
+    </body>
+</html>

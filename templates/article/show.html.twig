@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <h1>Produits</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+          
+                <td><h3>{{ article.name }}</h3></td>
+            </tr>
+            <tr> 
+                <td><img src="{{ asset('uploads/' ~ article.picture) }}" style="height: 300px; width: 400px; border: 5px solid black;" /></td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ article.price }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ article.description }}</td>
+            </tr>
+            <tr>
+                <th>Stock disponible</th>
+                <td>{{ article.stock }}</td>
+            </tr>
+            <tr>
+                <th>Caractéristiques</th>
+                <td>
+                    <ul>
+                        {% for cat in article.characteristic %}
+                            <li>{{ cat.getCharacteristicName}}: {{ cat.getType}}</li>
+                            <form method="post" action="{{ path('characteristic_delete', {'id': cat.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cat.id) }}">
+                                <br>
+                                <button class="btn btn-primary btn-sm">Supprimer la caracteristique</button>
+                            </form>
+
+                        {% endfor %}
+                    </ul>
+                </td>   
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_index') }}"><button type="button" class="btn btn-primary btn-sm">Retour à la liste de produit</button></a>
+
+    <a href="{{ path('article_edit', {'id': article.id}) }}"><button type="button" class="btn btn-primary btn-sm">Modifier le produit</button></a>
+
+    <a href="{{ path('add_article_characteristic', {'id': article.id}) }}"><button type="button" class="btn btn-primary btn-sm">Ajouter une caracteristique</button></a>
+
+    {{ include('article/_delete_form.html.twig') }}
+{% endblock %}

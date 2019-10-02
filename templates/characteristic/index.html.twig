@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index Caracteristique{% endblock %}
+
+{% block body %}
+    <h1>Index Caracteristique</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de la caracteristique</th>
+                <th>Type de la caracteristique</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for characteristic in characteristics %}
+            <tr>
+                <td>{{ characteristic.id }}</td>
+                <td>{{ characteristic.characteristicName }}</td>
+                <td>{{ characteristic.type }}</td>
+                <td>
+                    <a href="{{ path('characteristic_show', {'id': characteristic.id}) }}"><button type="button" class="btn btn-primary btn-sm">Visualiser la caracteristique</button></a>
+                    <a href="{{ path('characteristic_edit', {'id': characteristic.id}) }}"><button type="button" class="btn btn-primary btn-sm">Modifier la caracteristique</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">aucune caracteristique trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('characteristic_new') }}"><button type="button" class="btn btn-primary btn-sm">Crée une nouvelle caracteristique</button></a>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="checkbox mb-3">You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+             <!-- Background image for card set in CSS! -->
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Connectez-vous</h5>
+            <form class="form-signin">
+
+              <div class="form-label-group">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                 <label for="inputEmail" class="sr-only">E-mail</label>
+              </div>
+              
+              <hr>
+
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword" class="sr-only">Mot de passe</label>
+              </div>
+              <button class="btn btn-md btn-info btn-block text-uppercase" type="submit">Connection</button>
+                <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+</form>
+{% endblock %}
+
+
+ 
